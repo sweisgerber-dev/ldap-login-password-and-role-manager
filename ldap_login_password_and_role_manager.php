@@ -226,7 +226,7 @@ function ldap_login_password_and_role_manager_can_authenticate($username, $passw
     return array($result,null);
   }
 
-  if ( ! $ldap_login_password_and_role_manager_ldap = ldap_connect(LDAP_HOST, LDAP_PORT) ) {
+  if ( ! $ldap_login_password_and_role_manager_ldap = ldap_connect(trim(LDAP_HOST), LDAP_PORT) ) {
     ldap_login_password_and_role_manager_logger(array('message'=>'unable to connect to LDAP server in function '.__FUNCTION__.'()','priority'=>'local0.notice','tag'=>basename(__FILE__)));
     return array($result,null);
   }
