@@ -2,16 +2,16 @@
 Plugin Name: ldap_login_password_and_role_manager
 Plugin URI: http://ldap_login_password_and_role_manager.frankkoenen.com
 Description: Provide WP authentication and role management from LDAP
-Version: 1.0.11
-Author: Frank Koenen
+Version: 1.0.12
+Author: Frank Koenen, Sebastian Weisgerber (sweisgerber.dev@gmail.com, Fixes)
 Author URI: http://frankkoenen.com
 License: GPL2
-Contributors: fkoenen@feweb.net
+Contributors: fkoenen@feweb.net sweisgerber.dev@gmail.com
 Donate link: http://www.frankkoenen.com/ldap-and-wordpress
 Tags: LDAP, authentication, login
 Requires at least: 3.0
 Tested up to: 4.3.1
-Stable Tag: 1.0.11
+Stable Tag: 1.0.12
 
 Enables LDAP for user authentication, password management and role management.
 
@@ -114,6 +114,9 @@ Yes. Once the plugin is enabled, authentication control is passed on to the LDAP
 
 = 1.0.11 =
 * Sep-2015, maintenance release. additional location missed on change email notifications.
+
+= 1.0.12 =
+* August-2016, maintenance release. fixed errors listed with wordpress Debug Mode, fixed bug were leading/trailing spaces caused errors in server address usage.
 
 == Screenshots ==
 

@@ -3,8 +3,8 @@
 Plugin Name: LDAP LPRM
 Plugin URI: http://ldap_login_password_and_role_manager.frankkoenen.com
 Description: Provide WP authentication and role management from LDAP
-Version: 1.0.11
-Author: Frank Koenen
+Version: 1.0.12
+Author: Frank Koenen, Sebastian Weisgerber (sweisgerber.dev@gmail.com, Fixes)
 Author URI: http://www.frankkoenen.com
 Donate link: http://www.frankkoenen.com/ldap-and-wordpress
 # File: ldap_login_password_and_role_manager.php
@@ -21,6 +21,7 @@ Donate link: http://www.frankkoenen.com/ldap-and-wordpress
 # 07-Jul-13 fhk; updated to support userdn/userpw bind as option. Replaced all 'die' calls with return stats and related system logs.
 # 04-Sep-14 fhk; Philipp Jankov, patches for 3.9 support and deprecated fixes. 
 # 21-Sep-15 fhk; disabled password email notifications introduced in WP 4.3
+# 19-Aug-16 swe; fixed errros lsited in wordpress debug mode, fixed bug with spaces in server address
 #--------------------------------------------------
     Copyright 2011,2012,2013  Frank Koenen  (email : fkoenen@feweb.net)
 
