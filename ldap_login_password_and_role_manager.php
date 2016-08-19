@@ -99,8 +99,6 @@ function ldap_login_password_and_role_manager_dodefines() {
   $ldap_login_password_and_role_manager_ldap = null;
   foreach ( $controllers as $host ) {
 
-	logc("Host: >$host<");
-
 	if ( strpos($host, ':') !== false ) {
 		list( $host, $port ) = explode(':', $host, 2);
 		if ( (int)$port > 0 ) {
@@ -113,7 +111,6 @@ function ldap_login_password_and_role_manager_dodefines() {
   }
   if ( ! defined('LDAP_HOST') ) {
     define('LDAP_HOST', $ldaphosts);
-	logc("Host: >$ldaphosts< Port: 389");
     define('LDAP_PORT', 389);
   }
 }
