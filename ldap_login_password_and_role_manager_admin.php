@@ -9,7 +9,7 @@
 #--------------------------------------------------
 
 # If admin options update ..
-if ( $_POST['operation'] == 'saveit' ) {
+if ( isset( $_POST['operation'] ) && $_POST['operation'] == 'saveit' ) {
   update_option('ldap_login_password_and_role_manager_base_dn', trim($_POST['base_dn']));
   update_option('ldap_login_password_and_role_manager_domain_controllers', trim($_POST['domain_controller']));
   update_option('ldap_login_password_and_role_manager_binddn', trim($_POST['binddn']));
@@ -27,7 +27,7 @@ if ( $_POST['operation'] == 'saveit' ) {
 }
 
 # Test credentials
-if ( $_POST['operation'] == 'test' ) {
+if ( isset( $_POST['operation'] ) && $_POST['operation'] == 'test' ) {
   $GLOBALS['ldap_login_password_and_role_manager_testmode'] = 'yes';
   $t = wp_authenticate($_POST['username'],$_POST['password']);
   $testit = ( $GLOBALS['ldap_login_password_and_role_manager_testmode_ok'] ) ? 1 : 2;
@@ -81,11 +81,11 @@ Only LDAP authentication is tested, account creation is bypassed with this teste
 </form>
 
 <?php
-if ( (int)$testit == 1) {
+if ( isset( $testit ) && (int)$testit == 1) {
   echo '<h3>Test Results:</h3><p style="color:green">Congratulations! The test succeeded. The login credentials worked.';
   if ( ! empty($GLOBALS['ldap_login_password_and_role_manager_testmode_message']) ) echo '<br>Extra notes:<b>' . $GLOBALS['ldap_login_password_and_role_manager_testmode_message'] . '</b>';
   echo '</p>';
-} elseif ( (int)$testit == 2) {
+} elseif ( isset( $testit ) && (int)$testit == 2) {
   echo '<h3>Test Results:</h3><p style="color:red">Failure. Either your LDAP settings are incorrect or the test credentials are wrong.</p>';
 }
 ?>

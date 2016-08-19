@@ -98,16 +98,22 @@ function ldap_login_password_and_role_manager_dodefines() {
   $ldaphosts = ''; # string to hold each host separated by space
   $ldap_login_password_and_role_manager_ldap = null;
   foreach ( $controllers as $host ) {
-    list($host, $port) = explode(':', $host, 2);
-    if ( (int)$port > 0 ) {
-      define('LDAP_HOST', $host);
-      define('LDAP_PORT', $port);
-      break;
-    }
-    $ldaphosts .= trim($host) . ' ';
+
+	logc("Host: >$host<");
+
+	if ( strpos($host, ':') !== false ) {
+		list( $host, $port ) = explode(':', $host, 2);
+		if ( (int)$port > 0 ) {
+		  define('LDAP_HOST', $host);
+		  define('LDAP_PORT', $port);
+		  break;
+		}
+	}
+	$ldaphosts .= trim($host) . ' ';
   }
   if ( ! defined('LDAP_HOST') ) {
     define('LDAP_HOST', $ldaphosts);
+	logc("Host: >$ldaphosts< Port: 389");
     define('LDAP_PORT', 389);
   }
 }
@@ -226,7 +232,7 @@ function ldap_login_password_and_role_manager_can_authenticate($username, $passw
     return array($result,null);
   }
 
-  if ( ! $ldap_login_password_and_role_manager_ldap = ldap_connect(trim(LDAP_HOST), LDAP_PORT) ) {
+  if ( ! function_exists('ldap_connect') || ! $ldap_login_password_and_role_manager_ldap = ldap_connect(trim(LDAP_HOST), LDAP_PORT) ) {
     ldap_login_password_and_role_manager_logger(array('message'=>'unable to connect to LDAP server in function '.__FUNCTION__.'()','priority'=>'local0.notice','tag'=>basename(__FILE__)));
     return array($result,null);
   }
@@ -519,7 +525,9 @@ function ldap_login_password_and_role_manager_userprofile ( $user_id ) {
 
 function ldap_login_password_and_role_manager_login_form ($args = array()) {
 
-  if ( $GLOBALS['ldap_login_password_and_role_manager_password_is_expired'] )
+  $html = '';
+
+  if ( isset( $GLOBALS['ldap_login_password_and_role_manager_password_is_expired'] ) && $GLOBALS['ldap_login_password_and_role_manager_password_is_expired'] )
     $html = '
       <p><label id="ldap_login_password_and_role_manager_new_password_message">Your password has expired. Please enter a new password.</label></p><br>
       <p>
